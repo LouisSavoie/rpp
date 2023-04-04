@@ -1,0 +1,114 @@
+/* should be provided by site wide css */
+
+body {
+  margin: 0;
+}
+
+/* specific to app */
+
+main {
+  margin: 0 auto;
+  width: 100vw;
+  max-width: 600px;
+  height: 100vh;
+  max-height: 1080px;
+  font-size: 1rem;
+}
+
+.top-bar {
+  height: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: pink;
+}
+
+h3 {
+  margin: auto;
+  text-align: center;
+}
+
+#list-display {
+  margin: 0;
+  height: calc(100% - 4rem);
+  padding: 0;
+  list-style: none;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.item:nth-child(even) {
+  background-color: gray
+}
+
+.item:hover {
+  background-color: black;
+}
+
+.item-name {
+  max-width: calc(100% - 4rem);
+  padding: .25rem;
+  flex-grow: 1;
+  background-color: rgba(96, 157, 159, .9);
+}
+
+.item-points {
+  width: 3rem;
+  padding: .25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(169, 169, 169, .9);
+}
+
+#bottom-bar {
+  height: 2rem;
+  display: flex;
+  flex-direction: row;
+  background-color: greenyellow;
+}
+
+.w20p {
+  width: 20%;
+}
+
+#points-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+}
+
+.app-modal {
+  width: calc(100% - 2rem);
+  max-width: calc(600px - 2rem);
+  height: calc(100% - 2rem);
+  max-height: calc(1080px - 2rem);
+  padding: 1rem;
+  display: none;
+  flex-direction: column;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.app-modal-content {
+  margin: auto;
+  padding: 1rem;
+  font-weight: bold;
+  text-align: center;
+  background-color: rgb(169, 169, 169);
+}
+
+#not-enough-points-display {
+  display: none;
+}

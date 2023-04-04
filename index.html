@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rewards Points</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main>
+    <div class="top-bar">
+      <h3 id="view-display">Tasks</h3>
+      <button id="new-button" class="w20p">New</button>
+    </div>
+    <ul id="list-display"></ul>
+    <div id="bottom-bar">
+      <button id="tasks-view-button" class="w20p" onclick="renderView('tasks')">Tasks</button>
+      <button id="onces-view-button" class="w20p" onclick="renderView('onces')">Onces</button>
+      <button id="penalties-view-button" class="w20p" onclick="renderView('penalties')">Penalties</button>
+      <button id="rewards-view-button" class="w20p" onclick="renderView('rewards')">Rewards</button>
+      <div id="points-display" class="w20p"></div>
+    </div>
+    <div id="new-modal" class="app-modal">
+      <div class="app-modal-content">
+        <div>
+          <span>New <span id="new-type-display">Task</span></span>
+          <button class="close-modal-button" onclick="closeModal(newModal)">X</button>
+        </div>
+        <input type="text" name="name" id="new-name-input" placeholder="Name" required>
+        <input type="number" name="points" id="new-points-input" placeholder="Points" required>
+        <button id="new-ok-button">OK</button>
+      </div>
+    </div>
+    <div id="item-modal" class="app-modal">
+      <div class="app-modal-content">
+        <button class="close-modal-button" onclick="closeModal(itemModal)">X</button>
+        <span id="item-modal-name-display"></span>
+        <span id="item-modal-points-display"></span>
+        <button id="claim-button">Claim</button>
+        <!-- <button id="edit-button">Edit</button> -->
+        <button id="delete-button">Delete</button>
+        <p id="not-enough-points-display">Not Enough Points!</p>
+      </div>
+    </div>
+    <!-- <div id="edit-modal" class="app-modal">
+      <p>Edit <span id="edit-type-display"></span></p>
+      <button class="close-modal-button">X</button>
+      <input type="text" name="name" id="edit-name-input">
+      <input type="number" name="points" id="edit-points-input">
+      <button id="private-toggle-button">Private</button>
+      <button id="edit-ok-button">OK</button>
+    </div> -->
+  </main>
+  <script src="app.js"></script>
+</body>
+
+</html>
