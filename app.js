@@ -24,7 +24,7 @@ const newNameInput = document.querySelector('#new-name-input')
 const newPointsInput = document.querySelector('#new-points-input')
 
 // data
-let points = 54
+let points = 0
 let view = 'tasks'
 let viewsData = {
   tasks: {

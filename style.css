@@ -12,11 +12,15 @@ main {
   max-width: 600px;
   height: 100vh;
   max-height: 1080px;
-  font-size: 1rem;
+  font-size: 2rem;
+}
+
+main button {
+  font-size: 2rem;
 }
 
 .top-bar {
-  height: 2rem;
+  height: 3rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -28,9 +32,18 @@ h3 {
   text-align: center;
 }
 
+#points-display {
+  padding: 0 .5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+}
+
 #list-display {
   margin: 0;
-  height: calc(100% - 4rem);
+  height: calc(100% - 6rem);
   padding: 0;
   list-style: none;
   overflow: auto;
@@ -52,14 +65,14 @@ h3 {
 }
 
 .item-name {
-  max-width: calc(100% - 4rem);
+  max-width: calc(100% - 6rem);
   padding: .25rem;
   flex-grow: 1;
   background-color: rgba(96, 157, 159, .9);
 }
 
 .item-points {
-  width: 3rem;
+  width: 5rem;
   padding: .25rem;
   display: flex;
   flex-direction: column;
@@ -69,9 +82,10 @@ h3 {
 }
 
 #bottom-bar {
-  height: 2rem;
+  height: 3rem;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   background-color: greenyellow;
 }
 
@@ -79,12 +93,8 @@ h3 {
   width: 20%;
 }
 
-#points-display {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  font-weight: bold;
+.w25p {
+  width: 25%;
 }
 
 .app-modal {
