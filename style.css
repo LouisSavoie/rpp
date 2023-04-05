@@ -25,6 +25,10 @@ main button {
 
 .top-bar {
   height: 3rem;
+  width: 100%;
+  max-width: 600px;
+  position: absolute;
+  top: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -47,8 +51,8 @@ h3 {
 
 #list-display {
   margin: 0;
-  height: calc(100vh - 6rem);
-  padding: 0;
+  height: calc(100% - 6rem);
+  padding: 3rem 0;
   list-style: none;
   overflow: auto;
   overflow-x: hidden;
@@ -87,6 +91,10 @@ h3 {
 
 #bottom-bar {
   height: 3rem;
+  width: 100%;
+  max-width: 600px;
+  position: absolute;
+  bottom: 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
