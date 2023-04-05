@@ -23,6 +23,14 @@ const itemModal = document.querySelector('#item-modal')
 const newNameInput = document.querySelector('#new-name-input')
 const newPointsInput = document.querySelector('#new-points-input')
 
+// Mobile vh fix
+function vhFix() {
+  let vh = window.innerHeight * 0.01
+  document.documentElement.style.setProperty('--vh', `${vh}px`)
+}
+vhFix()
+window.addEventListener('resize', () => { vhFix() })
+
 // data
 let points = 0
 let view = 'tasks'
