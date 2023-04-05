@@ -52,7 +52,7 @@ h3 {
 #list-display {
   margin: 0;
   max-height: calc(100% - 6rem);
-  padding: 3rem 0;
+  padding: 3rem 0 0 0;
   list-style: none;
   overflow: auto;
   overflow-x: hidden;
