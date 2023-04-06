@@ -29,7 +29,8 @@ function vhFix() {
   document.documentElement.style.setProperty('--vh', `${vh}px`)
 }
 vhFix()
-window.addEventListener('resize', () => { vhFix() })
+// update vh when browser changes viewport on scroll
+// window.addEventListener('resize', () => { vhFix() })
 
 // data
 let points = 0
