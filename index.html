@@ -25,23 +25,34 @@
     </div>
     <div id="new-modal" class="app-modal">
       <div class="app-modal-content">
-        <div>
+        <div class="app-modal-row">
           <span>New <span id="new-type-display">Task</span></span>
-          <button class="close-modal-button" onclick="closeModal(newModal)">X</button>
+          <button id="close-modal-button" onclick="closeModal(newModal)">X</button>
         </div>
-        <input type="text" name="name" id="new-name-input" placeholder="Name" required>
-        <input type="number" name="points" id="new-points-input" placeholder="Points" required>
-        <button id="new-ok-button">OK</button>
+        <div class="app-modal-row">
+          <input type="text" name="name" id="new-name-input" placeholder="Name" required>
+        </div>
+        <div class="app-modal-row">
+          <input type="number" name="points" id="new-points-input" placeholder="Points" required>
+          <button id="new-ok-button">OK</button>
+        </div>
       </div>
     </div>
     <div id="item-modal" class="app-modal">
       <div class="app-modal-content">
-        <button class="close-modal-button" onclick="closeModal(itemModal)">X</button>
-        <span id="item-modal-name-display"></span>
-        <span id="item-modal-points-display"></span>
-        <button id="claim-button">Claim</button>
+        <div class="app-modal-row">
+          <span id="item-modal-name-display"></span>
+          <button class="close-modal-button" onclick="closeModal(itemModal)">X</button>
+        </div>
+        <div class="app-modal-row">
+          <div></div>
+          <span id="item-modal-points-display"></span>
+        </div>
+        <div class="app-modal-row">
+          <button id="delete-button">Delete</button>
+          <button id="claim-button">Claim</button>
+        </div>
         <!-- <button id="edit-button">Edit</button> -->
-        <button id="delete-button">Delete</button>
         <p id="not-enough-points-display">Not Enough Points!</p>
       </div>
     </div>
