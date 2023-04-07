@@ -179,9 +179,8 @@ deleteButton.addEventListener('click', () => {
 load()
 
 // DEV:
-// style modals
+// make new form so required inputs works
 // edit item
 // move item (https://stackoverflow.com/questions/1069666/sorting-object-property-by-values/37607084#37607084), or use flexbox ordering?
-// make new form so required inputs works
 // user settings, toggle allow rewards to take points into negative, off default
 // user settings, toggle allow penalties to take points into negative, on default
