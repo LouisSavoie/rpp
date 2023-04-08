@@ -7,6 +7,7 @@ const rewardsViewButton = document.querySelector('#rewards-view-button')
 const newButton = document.querySelector('#new-button')
 const deleteButton = document.querySelector('#delete-button')
 const claimButton = document.querySelector('#claim-button')
+const editButton = document.querySelector('#edit-button')
 // Displays
 const pointsDisplay = document.querySelector('#points-display')
 const viewDisplay = document.querySelector('#view-display')
@@ -14,15 +15,20 @@ const listDisplay = document.querySelector('#list-display')
 const itemModalNameDisplay = document.querySelector('#item-modal-name-display')
 const itemModalPointsDisplay = document.querySelector('#item-modal-points-display')
 const newTypeDisplay = document.querySelector('#new-type-display')
+const editTypeDisplay = document.querySelector('#edit-type-display')
 const notEnoughPointsDisplay = document.querySelector('#not-enough-points-display')
 // Modals
 const newModal = document.querySelector('#new-modal')
 const itemModal = document.querySelector('#item-modal')
+const editModal = document.querySelector('#edit-modal')
 // Inputs
 const newNameInput = document.querySelector('#new-name-input')
 const newPointsInput = document.querySelector('#new-points-input')
+const editNameInput = document.querySelector('#edit-name-input')
+const editPointsInput = document.querySelector('#edit-points-input')
 // Forms
 const newForm = document.querySelector('#new-form')
+const editForm = document.querySelector('#edit-form')
 
 // Mobile vh fix (make this a module for the site on game/app pages)
 function vhFix() {
@@ -147,11 +153,28 @@ newButton.addEventListener('click', () => {
   newModal.style.display = 'flex'
 })
 
+editButton.addEventListener('click', () => {
+  editNameInput.value = itemModalNameDisplay.innerHTML
+  editPointsInput.value = parseInt(itemModalPointsDisplay.innerHTML)
+  editTypeDisplay.innerHTML = viewsData[view].ItemType
+  closeModal(itemModal)
+  editModal.style.display = 'flex'
+})
+
 newForm.addEventListener('submit', (event) => {
   viewsData[view].list[newNameInput.value] = { name: newNameInput.value, points: parseInt(newPointsInput.value) }
   saveLocalStorage()
   renderList()
   closeModal(newModal)
+  event.preventDefault()
+})
+
+editForm.addEventListener('submit', (event) => {
+  delete viewsData[view].list[itemModalNameDisplay.innerHTML]
+  viewsData[view].list[editNameInput.value] = { name: editNameInput.value, points: parseInt(editPointsInput.value) }
+  saveLocalStorage()
+  renderList()
+  closeModal(editModal)
   event.preventDefault()
 })
 
@@ -179,7 +202,7 @@ deleteButton.addEventListener('click', () => {
 load()
 
 // DEV:
-// edit item
+// add history log
 // add icons
 // move item (https://stackoverflow.com/questions/1069666/sorting-object-property-by-values/37607084#37607084), or use flexbox ordering?
 // user settings, toggle allow rewards to take points into negative, off default

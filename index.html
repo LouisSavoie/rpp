@@ -58,33 +58,57 @@
 
     <!-- Item Modal -->
     <div id="item-modal" class="app-modal">
+
       <div class="app-modal-content">
+
         <div class="app-modal-row">
           <span id="item-modal-name-display"></span>
           <button class="close-modal-button" onclick="closeModal(itemModal)">X</button>
         </div>
+
         <div class="app-modal-row">
           <div></div>
           <span id="item-modal-points-display"></span>
         </div>
+
         <div class="app-modal-row">
-          <button id="delete-button">Delete</button>
-          <button id="claim-button">Claim</button>
+          <button id="delete-button">D</button>
+          <button id="edit-button">E</button>
+          <button id="claim-button">C</button>
         </div>
-        <!-- <button id="edit-button">Edit</button> -->
+
         <p id="not-enough-points-display">Not Enough Points!</p>
+
       </div>
+
     </div>
 
     <!-- Edit Modal -->
-    <!-- <div id="edit-modal" class="app-modal">
-      <p>Edit <span id="edit-type-display"></span></p>
-      <button class="close-modal-button">X</button>
-      <input type="text" name="name" id="edit-name-input">
-      <input type="number" name="points" id="edit-points-input">
-      <button id="private-toggle-button">Private</button>
-      <button id="edit-ok-button">OK</button>
-    </div> -->
+    <div id="edit-modal" class="app-modal">
+
+      <div class="app-modal-content">
+
+        <div class="app-modal-row">
+          <p>Edit <span id="edit-type-display"></span></p>
+          <button class="close-modal-button" onclick="closeModal(editModal)">X</button>
+        </div>
+
+        <form id="edit-form">
+
+          <div class="app-modal-row">
+            <input type="text" name="name" id="edit-name-input" required>
+          </div>
+
+          <div class="app-modal-row">
+            <input type="number" name="points" id="edit-points-input" required>
+            <button type="submit" id="edit-ok-button">OK</button>
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
 
   </main>
   <div id="test-box"></div>
