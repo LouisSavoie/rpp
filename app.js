@@ -5,7 +5,6 @@ const oncesViewButton = document.querySelector('#onces-view-button')
 const penaltiesViewButton = document.querySelector('#penalties-view-button')
 const rewardsViewButton = document.querySelector('#rewards-view-button')
 const newButton = document.querySelector('#new-button')
-const newOkButton = document.querySelector('#new-ok-button')
 const deleteButton = document.querySelector('#delete-button')
 const claimButton = document.querySelector('#claim-button')
 // Displays
@@ -22,15 +21,15 @@ const itemModal = document.querySelector('#item-modal')
 // Inputs
 const newNameInput = document.querySelector('#new-name-input')
 const newPointsInput = document.querySelector('#new-points-input')
+// Forms
+const newForm = document.querySelector('#new-form')
 
-// Mobile vh fix
+// Mobile vh fix (make this a module for the site on game/app pages)
 function vhFix() {
   let vh = window.innerHeight * 0.01
   document.documentElement.style.setProperty('--vh', `${vh}px`)
 }
 vhFix()
-// update vh when browser changes viewport on scroll
-// window.addEventListener('resize', () => { vhFix() })
 
 // data
 let points = 0
@@ -148,11 +147,12 @@ newButton.addEventListener('click', () => {
   newModal.style.display = 'flex'
 })
 
-newOkButton.addEventListener('click', () => {
+newForm.addEventListener('submit', (event) => {
   viewsData[view].list[newNameInput.value] = { name: newNameInput.value, points: parseInt(newPointsInput.value) }
   saveLocalStorage()
   renderList()
   closeModal(newModal)
+  event.preventDefault()
 })
 
 claimButton.addEventListener('click', () => {
@@ -179,8 +179,8 @@ deleteButton.addEventListener('click', () => {
 load()
 
 // DEV:
-// make new form so required inputs works
 // edit item
+// add icons
 // move item (https://stackoverflow.com/questions/1069666/sorting-object-property-by-values/37607084#37607084), or use flexbox ordering?
 // user settings, toggle allow rewards to take points into negative, off default
 // user settings, toggle allow penalties to take points into negative, on default
