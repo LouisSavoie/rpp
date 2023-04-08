@@ -24,10 +24,11 @@
 
     <!-- Bottom Bar -->
     <div id="bottom-bar">
-      <button id="tasks-view-button" class="w25p" onclick="renderView('tasks')">T</button>
-      <button id="onces-view-button" class="w25p" onclick="renderView('onces')">O</button>
-      <button id="penalties-view-button" class="w25p" onclick="renderView('penalties')">P</button>
-      <button id="rewards-view-button" class="w25p" onclick="renderView('rewards')">R</button>
+      <button id="tasks-view-button" onclick="renderView('tasks')">T</button>
+      <button id="onces-view-button" onclick="renderView('onces')">O</button>
+      <button id="penalties-view-button" onclick="renderView('penalties')">P</button>
+      <button id="rewards-view-button" onclick="renderView('rewards')">R</button>
+      <button id="log-button">L</button>
     </div>
 
     <!-- New Modal -->
@@ -105,6 +106,24 @@
           </div>
 
         </form>
+
+      </div>
+
+    </div>
+
+    <!-- Log Modal -->
+    <div id="log-modal" class="app-modal">
+
+      <div class="app-modal-content">
+
+        <div class="app-modal-row">
+          <div>Log</div>
+          <button class="close-modal-button" onclick="closeModal(logModal)">X</button>
+        </div>
+
+        <div id="log-display">
+
+        </div>
 
       </div>
 

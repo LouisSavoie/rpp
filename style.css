@@ -112,6 +112,10 @@ h3 {
   background-color: greenyellow;
 }
 
+#bottom-bar button {
+  flex-grow: 1;
+}
+
 .w20p {
   width: 20%;
 }
@@ -189,4 +193,11 @@ h3 {
 
 #not-enough-points-display {
   display: none;
+}
+
+#log-modal span {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: normal;
+  text-align: left;
 }

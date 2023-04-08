@@ -8,6 +8,7 @@ const newButton = document.querySelector('#new-button')
 const deleteButton = document.querySelector('#delete-button')
 const claimButton = document.querySelector('#claim-button')
 const editButton = document.querySelector('#edit-button')
+const logButton = document.querySelector('#log-button')
 // Displays
 const pointsDisplay = document.querySelector('#points-display')
 const viewDisplay = document.querySelector('#view-display')
@@ -17,10 +18,12 @@ const itemModalPointsDisplay = document.querySelector('#item-modal-points-displa
 const newTypeDisplay = document.querySelector('#new-type-display')
 const editTypeDisplay = document.querySelector('#edit-type-display')
 const notEnoughPointsDisplay = document.querySelector('#not-enough-points-display')
+const logDisplay = document.querySelector('#log-display')
 // Modals
 const newModal = document.querySelector('#new-modal')
 const itemModal = document.querySelector('#item-modal')
 const editModal = document.querySelector('#edit-modal')
+const logModal = document.querySelector('#log-modal')
 // Inputs
 const newNameInput = document.querySelector('#new-name-input')
 const newPointsInput = document.querySelector('#new-points-input')
@@ -62,10 +65,15 @@ let viewsData = {
     list: {}
   }
 }
+let log = []
+
+// Constants
+const LOG_SIZE = 10
 
 // Functions
 function load() {
-  checkLocalStorage()
+  checkLocalStorage() // temp, remove before deployment
+  updateWithLog() // temp, remove before deployment
   getLocalStorage()
   renderView(view)
   renderPoints()
@@ -83,6 +91,11 @@ function save(data) {
   localStorage.hiddenUtils = JSON.stringify(data)
   console.log('Data saved to local storage')
 }
+
+function updateWithLog() {
+  const ls = JSON.parse(localStorage.getItem('hiddenUtils'))
+  if (ls.apps.rewardsPoints.log === undefined) { ls.apps.rewardsPoints.log = log; localStorage.hiddenUtils = JSON.stringify(ls) }
+}
 // END TEMPORARY FOR TESTING
 
 // Local Storage
@@ -91,22 +104,29 @@ function getLocalStorage() {
   console.log('HiddenUtils local storage found: ', ls)
   if (ls.apps.rewardsPoints === undefined) {
     console.log('Local storage for Rewards Points not found')
-    ls.apps.rewardsPoints = { points: points, viewsData: viewsData }
+    ls.apps.rewardsPoints = { points: points, viewsData: viewsData, log: log }
     localStorage.hiddenUtils = JSON.stringify(ls)
     console.log('New local storage for Rewards Points created')
   } else {
     console.log('Local storage for Rewards Points found')
     points = ls.apps.rewardsPoints.points
     viewsData = ls.apps.rewardsPoints.viewsData
+    log = ls.apps.rewardsPoints.log
     console.log('Local storage for Rewards Points loaded')
   }
 }
 
 function saveLocalStorage() {
   const ls = JSON.parse(localStorage.getItem('hiddenUtils'))
-  ls.apps.rewardsPoints = { points: points, viewsData: viewsData }
+  ls.apps.rewardsPoints = { points: points, viewsData: viewsData, log: log }
   localStorage.hiddenUtils = JSON.stringify(ls)
   console.log('Rewards Points data saved to local storage')
+}
+
+// Data Functions
+function updateLog(action, itemType, item) {
+  log.push({ action: action, itemType: itemType, item: item })
+  if (log.length > LOG_SIZE) { log.shift() }
 }
 
 // Render Functions
@@ -163,6 +183,7 @@ editButton.addEventListener('click', () => {
 
 newForm.addEventListener('submit', (event) => {
   viewsData[view].list[newNameInput.value] = { name: newNameInput.value, points: parseInt(newPointsInput.value) }
+  updateLog('New', viewsData[view].ItemType, newNameInput.value)
   saveLocalStorage()
   renderList()
   closeModal(newModal)
@@ -172,6 +193,7 @@ newForm.addEventListener('submit', (event) => {
 editForm.addEventListener('submit', (event) => {
   delete viewsData[view].list[itemModalNameDisplay.innerHTML]
   viewsData[view].list[editNameInput.value] = { name: editNameInput.value, points: parseInt(editPointsInput.value) }
+  updateLog('Edit', viewsData[view].ItemType, editNameInput.value)
   saveLocalStorage()
   renderList()
   closeModal(editModal)
@@ -187,6 +209,7 @@ claimButton.addEventListener('click', () => {
     if (itemPoints > points && view !== 'penalties') { showNotEnoughPointsDisplay(); return }
     points -= itemPoints
   }
+  updateLog('Claim', viewsData[view].ItemType, itemModalNameDisplay.innerHTML)
   saveLocalStorage()
   renderPoints()
   closeModal(itemModal)
@@ -194,16 +217,31 @@ claimButton.addEventListener('click', () => {
 
 deleteButton.addEventListener('click', () => {
   delete viewsData[view].list[itemModalNameDisplay.innerHTML]
+  updateLog('Delete', viewsData[view].ItemType, itemModalNameDisplay.innerHTML)
   saveLocalStorage()
   renderList()
   closeModal(itemModal)
 })
 
+logButton.addEventListener('click', () => {
+  let logHTML = ''
+  log.forEach((entry) => {
+    logHTML += `
+    <div class="app-modal-row">
+      <span>${entry.action} ${entry.itemType}: ${entry.item}</span>
+    </div>
+    `
+  })
+  logDisplay.innerHTML = logHTML
+  logModal.style.display = 'flex'
+})
+
 load()
 
 // DEV:
-// add history log
+// add history log, new, edit, delete, claim
 // add icons
 // move item (https://stackoverflow.com/questions/1069666/sorting-object-property-by-values/37607084#37607084), or use flexbox ordering?
 // user settings, toggle allow rewards to take points into negative, off default
 // user settings, toggle allow penalties to take points into negative, on default
+// user settings, set log length, imp. scrolling on log-display div
