@@ -239,8 +239,8 @@ logButton.addEventListener('click', () => {
 load()
 
 // DEV:
-// add history log, new, edit, delete, claim
 // add icons
+// add help
 // move item (https://stackoverflow.com/questions/1069666/sorting-object-property-by-values/37607084#37607084), or use flexbox ordering?
 // user settings, toggle allow rewards to take points into negative, off default
 // user settings, toggle allow penalties to take points into negative, on default

@@ -16,7 +16,7 @@
     <div class="top-bar">
       <h3 id="view-display">Tasks</h3>
       <div id="points-display"></div>
-      <button id="new-button">N</button>
+      <button id="new-button"><img class="app-icon" src="img/icons/new.svg" alt="New"></button>
     </div>
 
     <!-- Lists -->
@@ -24,11 +24,11 @@
 
     <!-- Bottom Bar -->
     <div id="bottom-bar">
-      <button id="tasks-view-button" onclick="renderView('tasks')">T</button>
-      <button id="onces-view-button" onclick="renderView('onces')">O</button>
-      <button id="penalties-view-button" onclick="renderView('penalties')">P</button>
-      <button id="rewards-view-button" onclick="renderView('rewards')">R</button>
-      <button id="log-button">L</button>
+      <button id="tasks-view-button" onclick="renderView('tasks')"><img class="app-icon" src="img/icons/tasks.svg" alt="Tasks"></button>
+      <button id="onces-view-button" onclick="renderView('onces')"><img class="app-icon" src="img/icons/onces.svg" alt="Onces"></button>
+      <button id="penalties-view-button" onclick="renderView('penalties')"><img class="app-icon" src="img/icons/penalties.svg" alt="Penalties"></button>
+      <button id="rewards-view-button" onclick="renderView('rewards')"><img class="app-icon" src="img/icons/rewards.svg" alt="Rewards"></button>
+      <button id="log-button"><img class="app-icon" src="img/icons/log.svg" alt="Log"></button>
     </div>
 
     <!-- New Modal -->
@@ -38,7 +38,7 @@
 
         <div class="app-modal-row">
           <span>New <span id="new-type-display">Task</span></span>
-          <button class="close-modal-button" onclick="closeModal(newModal)">X</button>
+          <button class="close-modal-button" onclick="closeModal(newModal)"><img class="app-icon" src="img/icons/close.svg" alt="Close"></button>
         </div>
 
         <form id="new-form">
@@ -49,7 +49,7 @@
 
           <div class="app-modal-row">
             <input type="number" name="points" id="new-points-input" placeholder="Points" required>
-            <button type="submit" id="new-ok-button">OK</button>
+            <button type="submit" id="new-ok-button"><img class="app-icon" src="img/icons/ok.svg" alt="OK"></button>
           </div>
 
         </form>
@@ -64,7 +64,7 @@
 
         <div class="app-modal-row">
           <span id="item-modal-name-display"></span>
-          <button class="close-modal-button" onclick="closeModal(itemModal)">X</button>
+          <button class="close-modal-button" onclick="closeModal(itemModal)"><img class="app-icon" src="img/icons/close.svg" alt="Close"></button>
         </div>
 
         <div class="app-modal-row">
@@ -73,9 +73,9 @@
         </div>
 
         <div class="app-modal-row">
-          <button id="delete-button">D</button>
-          <button id="edit-button">E</button>
-          <button id="claim-button">C</button>
+          <button id="delete-button"><img class="app-icon" src="img/icons/delete.svg" alt="Delete"></button>
+          <button id="edit-button"><img class="app-icon" src="img/icons/edit.svg" alt="Edit"></button>
+          <button id="claim-button"><img class="app-icon" src="img/icons/claim.svg" alt="Claim"></button>
         </div>
 
         <p id="not-enough-points-display">Not Enough Points!</p>
@@ -90,8 +90,8 @@
       <div class="app-modal-content">
 
         <div class="app-modal-row">
-          <p>Edit <span id="edit-type-display"></span></p>
-          <button class="close-modal-button" onclick="closeModal(editModal)">X</button>
+          <span>Edit <span id="edit-type-display"></span></span>
+          <button class="close-modal-button" onclick="closeModal(editModal)"><img class="app-icon" src="img/icons/close.svg" alt="Close"></button>
         </div>
 
         <form id="edit-form">
@@ -102,7 +102,7 @@
 
           <div class="app-modal-row">
             <input type="number" name="points" id="edit-points-input" required>
-            <button type="submit" id="edit-ok-button">OK</button>
+            <button type="submit" id="edit-ok-button"><img class="app-icon" src="img/icons/ok.svg" alt="OK"></button>
           </div>
 
         </form>
@@ -118,7 +118,7 @@
 
         <div class="app-modal-row">
           <div>Log</div>
-          <button class="close-modal-button" onclick="closeModal(logModal)">X</button>
+          <button class="close-modal-button" onclick="closeModal(logModal)"><img class="app-icon" src="img/icons/close.svg" alt="Close"></button>
         </div>
 
         <div id="log-display">
