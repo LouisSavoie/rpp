@@ -47,23 +47,29 @@ let viewsData = {
   tasks: {
     name: 'Tasks',
     ItemType: 'Task',
-    list: {}
+    color: '34, 57, 184'
   },
   onces: {
     name: 'Onces',
     ItemType: 'Once',
-    list: {}
+    color: '255, 138, 0'
   },
   penalties: {
     name: 'Penalties',
     ItemType: 'Penalty',
-    list: {}
+    color: '218, 0, 0'
   },
   rewards: {
     name: 'Rewards',
     ItemType: 'Reward',
-    list: {}
+    color: '0, 155, 0'
   }
+}
+let lists = {
+  tasks: {},
+  onces: {},
+  penalties: {},
+  rewards: {}
 }
 let log = []
 
@@ -73,7 +79,6 @@ const LOG_SIZE = 10
 // Functions
 function load() {
   checkLocalStorage() // temp, remove before deployment
-  updateWithLog() // temp, remove before deployment
   getLocalStorage()
   renderView(view)
   renderPoints()
@@ -91,11 +96,6 @@ function save(data) {
   localStorage.hiddenUtils = JSON.stringify(data)
   console.log('Data saved to local storage')
 }
-
-function updateWithLog() {
-  const ls = JSON.parse(localStorage.getItem('hiddenUtils'))
-  if (ls.apps.rewardsPoints.log === undefined) { ls.apps.rewardsPoints.log = log; localStorage.hiddenUtils = JSON.stringify(ls) }
-}
 // END TEMPORARY FOR TESTING
 
 // Local Storage
@@ -104,13 +104,13 @@ function getLocalStorage() {
   console.log('HiddenUtils local storage found: ', ls)
   if (ls.apps.rewardsPoints === undefined) {
     console.log('Local storage for Rewards Points not found')
-    ls.apps.rewardsPoints = { points: points, viewsData: viewsData, log: log }
+    ls.apps.rewardsPoints = { points: points, lists: lists, log: log }
     localStorage.hiddenUtils = JSON.stringify(ls)
     console.log('New local storage for Rewards Points created')
   } else {
     console.log('Local storage for Rewards Points found')
     points = ls.apps.rewardsPoints.points
-    viewsData = ls.apps.rewardsPoints.viewsData
+    lists = ls.apps.rewardsPoints.lists
     log = ls.apps.rewardsPoints.log
     console.log('Local storage for Rewards Points loaded')
   }
@@ -118,7 +118,7 @@ function getLocalStorage() {
 
 function saveLocalStorage() {
   const ls = JSON.parse(localStorage.getItem('hiddenUtils'))
-  ls.apps.rewardsPoints = { points: points, viewsData: viewsData, log: log }
+  ls.apps.rewardsPoints = { points: points, lists: lists, log: log }
   localStorage.hiddenUtils = JSON.stringify(ls)
   console.log('Rewards Points data saved to local storage')
 }
@@ -143,15 +143,17 @@ function renderView(newView) {
 
 function renderList() {
   let listHTML = ''
-  for (const li of Object.values(viewsData[view].list)) {
-    listHTML += `<li class="item" onClick="renderItemModal('${li.name}')"><div class="item-name">${li.name}</div><div class="item-points"><span>${li.points}</span></div></li>`
+  let i = 1
+  for (const li of Object.values(lists[view])) {
+    listHTML += `<li class="item" onClick="renderItemModal('${li.name}')" style="background-color:rgba(${viewsData[view].color}, ${i % 2 == 0 ? '0.8' : '1'});"><div class="item-name">${li.name}</div><div class="item-points"><span>${li.points}</span></div></li>`
+    i++
   }
   listDisplay.innerHTML = listHTML
 }
 
 function renderItemModal(itemName) {
-  itemModalNameDisplay.innerHTML = viewsData[view].list[itemName].name
-  itemModalPointsDisplay.innerHTML = viewsData[view].list[itemName].points + ' Points'
+  itemModalNameDisplay.innerHTML = lists[view][itemName].name
+  itemModalPointsDisplay.innerHTML = lists[view][itemName].points + ' Points'
   itemModal.style.display = 'flex'
 }
 
@@ -182,7 +184,7 @@ editButton.addEventListener('click', () => {
 })
 
 newForm.addEventListener('submit', (event) => {
-  viewsData[view].list[newNameInput.value] = { name: newNameInput.value, points: parseInt(newPointsInput.value) }
+  lists[view][newNameInput.value] = { name: newNameInput.value, points: parseInt(newPointsInput.value) }
   updateLog('New', viewsData[view].ItemType, newNameInput.value)
   saveLocalStorage()
   renderList()
@@ -191,8 +193,8 @@ newForm.addEventListener('submit', (event) => {
 })
 
 editForm.addEventListener('submit', (event) => {
-  delete viewsData[view].list[itemModalNameDisplay.innerHTML]
-  viewsData[view].list[editNameInput.value] = { name: editNameInput.value, points: parseInt(editPointsInput.value) }
+  delete lists[view][itemModalNameDisplay.innerHTML]
+  lists[view][editNameInput.value] = { name: editNameInput.value, points: parseInt(editPointsInput.value) }
   updateLog('Edit', viewsData[view].ItemType, editNameInput.value)
   saveLocalStorage()
   renderList()
@@ -201,10 +203,10 @@ editForm.addEventListener('submit', (event) => {
 })
 
 claimButton.addEventListener('click', () => {
-  const itemPoints = viewsData[view].list[itemModalNameDisplay.innerHTML].points
+  const itemPoints = lists[view][itemModalNameDisplay.innerHTML].points
   if (view === 'tasks' || view === 'onces') {
     points += itemPoints
-    if (view === 'onces') { delete viewsData[view].list[itemModalNameDisplay.innerHTML]; renderList() }
+    if (view === 'onces') { delete lists[view][itemModalNameDisplay.innerHTML]; renderList() }
   } else {
     if (itemPoints > points && view !== 'penalties') { showNotEnoughPointsDisplay(); return }
     points -= itemPoints
@@ -216,7 +218,7 @@ claimButton.addEventListener('click', () => {
 })
 
 deleteButton.addEventListener('click', () => {
-  delete viewsData[view].list[itemModalNameDisplay.innerHTML]
+  delete lists[view][itemModalNameDisplay.innerHTML]
   updateLog('Delete', viewsData[view].ItemType, itemModalNameDisplay.innerHTML)
   saveLocalStorage()
   renderList()
@@ -239,7 +241,7 @@ logButton.addEventListener('click', () => {
 load()
 
 // DEV:
-// add icons
+// finalize style: new close button icon without circle, new new button icon without circle, different colors for views, color view button when active
 // add help
 // move item (https://stackoverflow.com/questions/1069666/sorting-object-property-by-values/37607084#37607084), or use flexbox ordering?
 // user settings, toggle allow rewards to take points into negative, off default
