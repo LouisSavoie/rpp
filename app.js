@@ -241,7 +241,6 @@ logButton.addEventListener('click', () => {
 load()
 
 // DEV:
-// finalize style: new close button icon without circle, new new button icon without circle, different colors for views, color view button when active
 // add help
 // move item (https://stackoverflow.com/questions/1069666/sorting-object-property-by-values/37607084#37607084), or use flexbox ordering?
 // user settings, toggle allow rewards to take points into negative, off default
